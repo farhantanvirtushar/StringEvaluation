@@ -93,12 +93,17 @@ public class EquationEvaluation{
             }
             else if (i==byteLength-1)
             {
-                parse[k]=new String(b,i,i-j+1);
+                parse[k]=new String(b,j,i-j+1);
                 k++;
                 j=i+1;
             }
         }
+
         numOfTerms = k;
+        for(int i=0;i<numOfTerms;i++)
+        {
+            System.out.println(parse[i]);
+        }
         terms = new Term[numOfTerms];
         for(int i=0;i<numOfTerms;i++)
         {
@@ -152,6 +157,22 @@ public class EquationEvaluation{
                     terms[i].priority=5;
                     terms[i].value=0;
                     terms[i].str=parse[i];
+                }
+            }
+        }
+        for(int i=0;i<numOfTerms;i++)
+        {
+            if(terms[i].str.equals("-"))
+            {
+                if((i==0))
+                {
+                    terms[i].type=UNARY;
+                    terms[i].priority=5;
+                }
+                else if((terms[i-1].type!=VARIBLE)&&(terms[i-1].type!=CONSTANT))
+                {
+                    terms[i].type=UNARY;
+                    terms[i].priority=5;
                 }
             }
         }
@@ -325,6 +346,10 @@ public class EquationEvaluation{
     {
         float result = 0;
 
+        if(operator.equals("-"))
+        {
+            result =(float)((-1)*v);
+        }
         if(operator.equals("sin"))
         {
             result = (float)( Math.sin(v));
