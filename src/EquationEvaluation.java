@@ -4,7 +4,7 @@ public class EquationEvaluation{
     String parse[];
     int numOfTerms;
     final int CONSTANT = 1;
-    final int VARIBLE = 2;
+    final int VARIABLE = 2;
     final int BINARY = 3;
     final int UNARY = 4;
     final int BRACKET = 5;
@@ -133,7 +133,7 @@ public class EquationEvaluation{
             }
             else if((parse[i].equals("x"))||(parse[i].equals("y"))||(parse[i].equals("z")))
             {
-                terms[i].type=VARIBLE;
+                terms[i].type=VARIABLE;
                 terms[i].str=parse[i];
                 terms[i].value=0;
                 terms[i].priority=0;
@@ -169,7 +169,7 @@ public class EquationEvaluation{
                     terms[i].type=UNARY;
                     terms[i].priority=5;
                 }
-                else if((terms[i-1].type!=VARIBLE)&&(terms[i-1].type!=CONSTANT))
+                else if((terms[i-1].type!=VARIABLE)&&(terms[i-1].type!=CONSTANT))
                 {
                     terms[i].type=UNARY;
                     terms[i].priority=5;
@@ -191,7 +191,7 @@ public class EquationEvaluation{
         {
             Term term = new Term();
             term = terms[i];
-            if((term.type==VARIBLE)||(term.type==CONSTANT))
+            if((term.type==VARIABLE)||(term.type==CONSTANT))
             {
                 postFix[k]=term;
                 k++;
@@ -314,7 +314,7 @@ public class EquationEvaluation{
                 stack.push(t);
             }
             else {
-                if(term.type==VARIBLE)
+                if(term.type==VARIABLE)
                 {
                     if(term.str.equals("x"))
                     {
@@ -453,7 +453,7 @@ public class EquationEvaluation{
             {
                 t+= value+ " ---> constant";
             }
-            else if(type == VARIBLE)
+            else if(type == VARIABLE)
             {
                 t+= str+" ---> variable";
             }
